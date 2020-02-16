@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+
+  app:
+    build:
+      context: ./docker/app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      RAILS_ENV: development
+      RAILS_MASTER_KEY: ebcd5febbf1e469c8cdfb57a09aafb8c
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+      - /var/tmp
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0.16
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myapp_production
+      MYSQL_USERNAME: root
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "4306:3306"
+    volumes:
+      -  mysql_data:/var/lib/mysql
+
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/log:/var/log/nginx
+      - public-data:/todoapp/public
+    depends_on:
+      - app
+
+volumes:
+  bundle:
+  mysql_data:
+  public-data:
+  sockets:
