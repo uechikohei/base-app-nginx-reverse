@@ -11,6 +11,10 @@
 
 `rails new . --force --database=mysql`
 
+### データベースを作成、更新
+
+=>
+
 ### database.ymlを変更
 
 =>
