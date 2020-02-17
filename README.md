@@ -50,9 +50,9 @@ production:
 
 `rails db:migrate`
 
-==>> http://localhost/　アクセスすると、your are on rails!!になるはずです。
+==>> http://localhost　アクセスすると、your are on rails!!になるはずです。
 　　　検証でみれるが、nginxリバースプロキシが働いており
-     http://localhost/　から　http://localhost/3000 に通信されているのが確認出来ます。
+     http://localhost　から　http://localhost/3000 に通信されているのが確認出来ます。
 
 
 # 備考
