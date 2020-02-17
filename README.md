@@ -52,7 +52,7 @@ production:
 
 ==>> http://localhost   アクセスすると、your are on rails!!になるはずです。
 　　　検証でみれるが、nginxリバースプロキシが働いており
-     http://localhost　  からhttp://localhost/3000 に通信されているのが確認出来ます。
+     http://localhost/   からhttp://localhost/3000 に通信されているのが確認出来ます。
 
 
 # 備考
