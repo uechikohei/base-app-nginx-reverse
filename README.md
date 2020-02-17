@@ -51,8 +51,21 @@ production:
 `rails db:migrate`
 
 ==>> http://localhost   アクセスすると、your are on rails!!になるはずです。
-　　　検証でみれるが、nginxリバースプロキシが働いており
+　　　nginxリバースプロキシが働いており
      http://localhost   からhttp://localhost/3000 に通信されているのが確認出来ます。
+
+
+## モデルやビューの作成
+
+`docker-compose up -d`
+
+`docker-compose exec app bash`
+
+作成
+`rails generate controller home index`
+　　取り消す場合
+　　`rails destroy controller home index`
+
 
 
 # 備考
@@ -60,6 +73,7 @@ production:
 ### bootstrap導入（yarnで）
 
 Gemfileではなく、yarnパッケージでインストール。
+
 `yarn add bootstrap jquery popper.js`
 
 ・ webpackerで管理するパターン
