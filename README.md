@@ -36,7 +36,7 @@ test:
 production:
   <<: *default
   database: app_production
-  username: db
+  username: root
   password: root
 
 ```
