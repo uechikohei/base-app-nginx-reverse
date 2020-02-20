@@ -36,7 +36,7 @@ test:
 production:
   <<: *default
   database: app_production
-  username: db
+  username: root
   password: root
 
 ```
@@ -52,7 +52,7 @@ production:
 
 ==>> http://localhost   アクセスすると、your are on rails!!になるはずです。
 　　　nginxリバースプロキシが働いており
-     http://localhost   からhttp://localhost/3000 に通信されているのが確認出来ます。
+     http://localhostからhttp://localhost/3000 に通信されているのが確認出来ます。
 
 
 ## モデルやビューの作成
@@ -102,17 +102,17 @@ import "../src/application"
 ```
 
 ・ディレクトリ とファイル作成
-app/javascript配下に、srcというディレクトリ 作成。
-src/配下に、appication.scssファイル作成。
+app/javascript配下に、`src`というディレクトリ 作成。
+`src/`配下に、`appication.scss`ファイル作成。
 
-app/javascript/src/application.scss に記述する。
+`app/javascript/src/application.scss` に記述する。
 
 ```
 @import "~bootstrap/scss/bootstrap";
 ```
 
 ・bootstrapを使用する
-app/views/layouts/application.html.erbに記述。
+`app/views/layouts/application.html.erb`に記述。
 <head></head>タグ内に、
 
 ```

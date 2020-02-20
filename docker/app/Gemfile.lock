@@ -27,10 +27,6 @@ COPY Gemfile.lock $APP_ROOT
 RUN bundle install
 RUN bundle exec rails assets:precompile
 
-# Expose volumes to frontend
-VOLUME $APP_ROOT/public
-VOLUME $APP_ROOT/tmp
-
 COPY . $APP_ROOT
 
 ARG RAILS_MASTER_KEY
