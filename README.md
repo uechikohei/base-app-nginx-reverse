@@ -72,6 +72,13 @@ production:
 
 ### bootstrap導入（yarnで）
 
+Gemfileに記述
+`gem `webpacker` `=>railsコンテナに対して、webpackerコマンドが使用できるようにインストールされる。
+
+コンテナ内に、webpackerインストール
+`docker-compose run app bash`=>railsコンテナ内に入る
+`rails webpacker:install` =>railsコンテナに対して、webpackerがインストールされる
+
 Gemfileではなく、yarnパッケージでインストール。
 
 `yarn add bootstrap jquery popper.js`
