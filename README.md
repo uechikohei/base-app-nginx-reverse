@@ -7,9 +7,7 @@
 
 `docker-compose build`
 
-`docker-compose up -d `
-
-`docker-compose exec app bash`
+`docker-compose run app bash`
 
 `rails new . --force --database=mysql`
 
@@ -42,13 +40,15 @@ production:
 ```
 ### データベースを作成2
 
-`docker-compose up -d`
+`docker-compose build`
 
-`docker-compose exec app bash`
+`docker-compose run app bash`
 
 `rails db:create`
 
 `rails db:migrate`
+
+`docker-compose up`
 
 ==>> http://localhost   アクセスすると、your are on rails!!になるはずです。
 　　　nginxリバースプロキシが働いており
