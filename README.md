@@ -1,4 +1,4 @@
-# base-app
+# base-app-nginx-reverse
 構成：ruby2.6.5 / rails6.0.2 / nginx1.16(リバースプロキシ設定) / mysql8.0.16(イメージとして使用) / docker-compose 
 
 # 使い方
