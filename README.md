@@ -3,7 +3,7 @@
 
 # 使い方
 
-`git clone git@github.com:uechikohei/base-app.git`
+`git clone git@github.com:uechikohei/base-app-nginx-reverse.git`
 
 `docker-compose build`
 
@@ -38,7 +38,10 @@ production:
   password: root
 
 ```
-### データベースを作成2
+
+## データベースを作成
+
+`docker-compose down`
 
 `docker-compose build`
 
@@ -67,17 +70,13 @@ production:
 　　`rails destroy controller home index`
 
 
-
-# 備考
-
-### bootstrap導入（yarnで）
-
-Gemfileに記述
-`gem `webpacker` `=>railsコンテナに対して、webpackerコマンドが使用できるようにインストールされる。
+## bootstrap導入（yarnで）
 
 コンテナ内に、webpackerインストール
-`docker-compose run app bash`=>railsコンテナ内に入る
-`rails webpacker:install` =>railsコンテナに対して、webpackerがインストールされる
+
+`docker-compose run app bash`
+
+`rails webpacker:install` 
 
 Gemfileではなく、yarnパッケージでインストール。
 
@@ -99,7 +98,8 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
 
 module.exports = environment
 ```
-・bootstrapをrailsで使用する設定。
+
+
 app/javascript/packs/application.jsに記述する。
 
 ```
@@ -108,8 +108,8 @@ import "bootstrap"
 import "../src/application"
 ```
 
-・ディレクトリ とファイル作成
 app/javascript配下に、`src`というディレクトリ 作成。
+
 `src/`配下に、`appication.scss`ファイル作成。
 
 `app/javascript/src/application.scss` に記述する。
@@ -127,3 +127,24 @@ app/javascript配下に、`src`というディレクトリ 作成。
 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 ```
 
+### docker-compose.ymlで起動するwebpackerコンテナと、.env.dockerで開発環境でのwebpacker起動と連携を制御。
+
+```
+  webpacker:
+    build:
+      context: .
+      dockerfile: ./docker/app/rails_Dockerfile
+    env_file:
+      - '.env.docker'
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/webpacker-example-app
+    ports:
+      - '3035:3035'
+```
+
+```
+NODE_ENV=development
+RAILS_ENV=development
+WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+```
