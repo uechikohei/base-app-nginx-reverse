@@ -2,6 +2,18 @@ version: '3'
 
 services:
 
+  webpacker:
+    build:
+      context: .
+      dockerfile: ./docker/app/rails_Dockerfile
+    env_file:
+      - '.env.docker'
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/webpacker-example-app
+    ports:
+      - '3035:3035'
+
   app:
     build:
       context: ./docker/app
@@ -13,7 +25,6 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     environment:
       RAILS_ENV: development
-      RAILS_MASTER_KEY: ebcd5febbf1e469c8cdfb57a09aafb8c
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
@@ -44,7 +55,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./nginx/log:/var/log/nginx
+      - ./docker/nginx/log:/var/log/nginx
       - public-data:/todoapp/public
     depends_on:
       - app
